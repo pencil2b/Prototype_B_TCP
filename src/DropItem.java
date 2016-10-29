@@ -1,16 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Test;
-
+/* @author Neptune */
 import java.util.HashMap;
 
-/**
- *
- * @author Neptune
- */
 public class DropItem implements Runnable {
     String object;
     int count = 5;
@@ -26,13 +16,13 @@ public class DropItem implements Runnable {
         for (; count > 0; count--) {
             try {
                 Item.existTime.replace(object,count);
-                Thread.sleep(1000);   
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
             }
         }
         Item.existTime.replace(object,count);
         Item.ReleaseItem(object);
-        
+
     }
 
 }

@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Test;
-
-/**
- *
- * @author Neptune
- */
+/* @author Neptune */
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 public class Server {
-    
+
     int count = 1;
     Item allItem;
-    
+
     public static void main(String args[]) {
         new Server().establish();
-        
+
     }
-    
+
     public void establish() {
         allItem = new Item();
         Thread tt = new Thread(new Runnable() {
@@ -53,15 +43,15 @@ public class Server {
             System.out.println("Server Break!!!!");
         }
     }
-    
+
     public class Process implements Runnable {
-        
+
         String userName;
         PrintStream writer;
         BufferedReader reader;
         Socket sock;
         int id;
-        
+
         public Process(int id, Socket cSocket) {
             try {
                 this.sock = cSocket;
@@ -69,7 +59,7 @@ public class Server {
                 this.reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
                 this.writer = new PrintStream(sock.getOutputStream());
 
-                // Set Client id 
+                // Set Client id
                 writer.println(count);
                 writer.flush();
 
@@ -80,17 +70,17 @@ public class Server {
                 Date now = new Date();
                 String ip = cSocket.getInetAddress().getHostAddress();
                 System.out.println(now.toString() + "\nIP : " + ip + "\nName : " + userName + "\nStart to Connect.\n");
-                
-                
+
+
             } catch (Exception ex) {
                 System.out.println("失去連接");
             }
         }
-        
+
         public void run() {
             String message;
             try {
-                
+
                 Thread tt = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -106,7 +96,7 @@ public class Server {
                     }
                 });
                 tt.start();
-                
+
                 while ((message = reader.readLine()) != null) {
                     String ss[] = message.split(" ");
                     switch (ss[0]) {
@@ -131,7 +121,7 @@ public class Server {
                 System.out.println("有一個連接離開");
             }
         }
-        
+
     }
-    
+
 }

@@ -1,31 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Test;
-
-/**
- *
- * @author Neptune
- */
-import Fuck.*;
+/* @author Neptune */
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//--------------------------------------------------------------//
-//程式流程
-//---MyClient   --主類別檔
-//-1-main()   --主程式進入點
-//-2-MyClient()   --   --設定及宣告  
-//-3-EstablishConnection() --方法   --建立連線
-//-4-class IncomingReader --內部類別  --接收資料
-//-5-actionPerformed()  --方法   --按下之動作 
-//--------------------------------------------------------------//
-//MyClient主類別檔
-//--------------------------------------------------------------//
 
 public class Client {
 
@@ -46,12 +22,12 @@ public class Client {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void giveServerInfo(String name){
         writer.println(name);
         writer.flush();
     }
-    
+
 
     private void EstablishConnection() {
         try {
@@ -68,12 +44,11 @@ public class Client {
             readerThread.start();
             Thread writerThread = new Thread(new OutputWriter());
             writerThread.start();
-            
+
+			//自動一直拿一直拿
             Thread AutoGet = new Thread(new MachineGet());
             AutoGet.start();
-            
-            //自動一直拿一直拿
-            
+
 
         } catch (IOException ex) {
             System.out.println("建立連線失敗");
@@ -108,7 +83,7 @@ public class Client {
             }
         }
     }
-    
+
     public class MachineGet implements Runnable{
         String items[] = new String[]{"Abalone","Hot_Girl","Hot_Dog","Sexy_Fish","Shark_Wing","30CM_Dick"};
         public void run() {
